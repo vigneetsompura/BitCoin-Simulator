@@ -1,9 +1,9 @@
-# Galleon
+﻿# Galleon
 
 Team Members:
 -------------
-Vigneet Sompura (UFID: 8121-1616)
-Venkatalakshmisupraja Keerthikaushal Gudur   (UFID: 8241-4961)
+Vigneet Sompura
+Venkatalakshmisupraja Keerthikaushal Gudur
 
 Description:
 ------------
