@@ -1,0 +1,10 @@
+ 
+ <script> 
+    document.addEventListener("DOMContentLoaded", function(){
+        window.createSocket(<%= @params.id%>) 
+    });
+
+
+ </script>
+
+ <h2> Balance of wallet  <span id="id"></span> is <span id="balance"></span> </h2>

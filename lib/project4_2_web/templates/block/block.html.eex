@@ -1,0 +1,86 @@
+<section class="status-container">
+<%#
+#     :block_number
+#     :hash
+#     :prev_hash
+#     :merkel_root
+#     :timestamp
+#     :difficulty
+#     :nonce
+#     :coinbase_transaction
+#     [transactions] %>
+
+    <table>
+      <tr> <td class="statustype"><p>Block #:</p></td> <td class="statusmsg"><%=@params.block.block_number %></td>  </tr>
+      <tr> <td class="statustype"><p>Hash:</p></td> <td class="statusmsg"><%=@params.block.hash %></td>  </tr>
+      <tr> <td class="statustype"><p>Hash of previous block:</p></td> <td class="statusmsg">
+         <a href = "/block/<%= @params.block.block_number - 1 %>"> 
+            <%=@params.block.prev_hash %>
+         </a>
+      </td>  </tr>
+      <tr> <td class="statustype"><p>Merkel root:</p></td> <td class="statusmsg"><%=@params.block.merkel_root %></td> </tr>
+      <tr> <td class="statustype"><p>Time of creation:</p></td> <td class="statusmsg"><%=@params.block.timestamp %></td>  </tr>
+      <tr> <td class="statustype"><p>Target:</p></td> <td class="statusmsg"><%=@params.block.difficulty %> </td> </tr>
+      <tr> <td class="statustype"><p>Nonce:</p></td> <td class="statusmsg"><%=@params.block.nonce %></td>  </tr>
+    </table>
+
+</section>
+
+<%# # transaction: %{
+#     :id => hash of the transaction
+#     :input => [
+#         %{
+#             :prev_transaction => Transactionhash/Address   
+#             :amount => amount of bitcoins
+#             :public_key => public_key to verify signature
+#             :signature => signature generated with :prev_hash, :output_index, :amount
+#         }
+#     ]
+    
+#     :output => [
+#         ${
+#             :address => address of receiver
+#             :amount => received amount 
+#         }
+#     ]
+# } %>
+<section class="transaction-container">
+    <div class="transaction-header"> Transactions </div>
+
+      <%=if(@params.block.block_number != 0) do %>
+      <div class = "transaction">
+        <div class = "id-container">
+          <%=@params.block.coinbase_transaction.id%>
+        </div>
+        <div class = "contents">
+          <div class = "input-contents">
+            -
+          </div>
+          <div class = "output-contents">
+              <p> <%=Integer.to_string(String.to_integer(@params.block.coinbase_transaction.output.address),16)%> (<%=@params.block.coinbase_transaction.output.amount%> Ǥ)</p>
+          </div>
+      </div>
+      
+      <% end %>
+
+      <%= Enum.map(@params.block.transactions, fn(t) -> %>
+                    <div class = "transaction">
+                      <div class = "id-container">
+                        <%=t.id%>
+                      </div>
+                      <div class = "contents">
+                        <div class = "input-contents">
+                          <%= Enum.map(t.input, fn(ip) -> %>
+                            <p> <%=Integer.to_string(String.to_integer(Enum.at(String.split(ip.prev_transaction,"/"),1)),16)%> (<%=ip.amount%> Ǥ)</p>
+                          <%end)%>
+                        </div>
+                        <div class = "output-contents">
+                          <%= Enum.map(t.output, fn(op) -> %>
+                            <p> <%=Integer.to_string(String.to_integer(op.address),16)%> (<%=op.amount%> Ǥ)</p>
+                          <%end)%>
+                        </div>
+                      </div>
+                    </div>   
+      <%end)%>
+    <div class="block-tail"></div>
+</section>

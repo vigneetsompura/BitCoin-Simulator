@@ -1,0 +1,20 @@
+<section class="status-container">
+
+    <table>
+      <tr> <td class="statustype"><p>Transaction ID:</p></td> <td class="statusmsg"><%=@params.transaction_id %></td>  </tr>
+      <tr> <td class="statustype"><p>Status:</p></td> <td class="statusmsg"><span id="transaction_status">Pending</span></td>  </tr>
+      <tr> <td class="statustype"><p>block:</p></td> <td class="statusmsg">
+         <a id="block_link"> 
+            <span id="block_hash">-</span>
+         </a>
+      </td>  </tr>
+    </table>
+
+</section>
+
+<script>
+//SHOW CHANNEL REGISTRATION
+    document.addEventListener("DOMContentLoaded", function(){
+        window.createTransactionSocket(`<%=@params.transaction_id %>`); 
+    });
+</script>

@@ -1,0 +1,231 @@
+<section class="status-container">
+  
+  <table>
+  <tr> <td class="statustype"><p>No. of miners:</p></td> <td class="statusmsg"><span id="miners"></span></td>  </tr>
+  <tr> <td class="statustype"><p>No. of non-miners:</p></td> <td class="statusmsg"><span id="wallets"></span></td>  </tr>
+  <tr> <td class="statustype"><p>No. of nodes:</p></td> <td class="statusmsg"><span id="nodes"></span></td>  </tr>
+  <tr> <td class="statustype"><p>Current Difficulty:</p></td> <td class="statusmsg"><span id="difficulty"></span> </td> </tr>
+  <tr> <td class="statustype"><p>Current Target:</p></td> <td class="statusmsg"><span id="target"></span></td>  </tr>
+  <tr> <td class="statustype"><p>Hash of last block:</p></td> <td class="statusmsg"><span id="lastblock"></span> </td> </tr>
+  <tr> <td class="statustype"><p>Length of Blockchain:</p></td> <td class="statusmsg"><span id="chainlength"></span></td>  </tr>
+  <tr> <td class="statustype"><p>Total Unspent Transactions:</p></td> <td class="statusmsg"><span id="utxo"></span></td>  </tr>
+  <tr> <td class="statustype"><p>Current Bounty:</p></td> <td class="statusmsg"><span id="bounty"></span></td>  </tr>
+  <tr> <td class="statustype"><p>Total Coins in the System:</p></td> <td class="statusmsg"><span><span id="coins"></span> Ǥ</span></td>  </tr>
+  </table>
+
+</section>
+
+<section class = "chart-container">
+    <div style="width:50%; display:inline-block;" align="left">
+        <canvas id="difficultyChart" width="500px" height="350px"></canvas>
+    </div>
+    <div style="width:49%; display:inline-block;" align="right">
+        <canvas id="ttmChart" width="500px" height="350px"></canvas>
+    </div>
+</section> 
+
+<section class = "chart-container">
+    <div style="width:50%; display:inline-block;" align="left">
+        <canvas id="pTChart" width="500px" height="350px"></canvas>
+    </div>
+    <div style="width:49%; display:inline-block;" align="right">
+        <canvas id="utxoChart" width="500px" height="350px"></canvas>
+    </div>
+</section> 
+
+<section class="blocks-container">
+    <div class="block-header"> Last 20 Blocks</div>
+    <div id="block-list">
+        <%= Enum.map(@params.block_map, fn({id,hash}) -> %>
+                <div id="block<%= id%>" class="block<%= rem(id,2)%>">
+                    <div class="block-id"><%= id%> :</div>
+                    <a href="/block/<%= id%>">
+                        <div class="block-hash"><%= hash%></div>
+                    </a>
+                </div>   
+        <%end)%>
+    </div>
+    <div class="block-tail"></div>
+</section>
+
+<script> 
+
+	 //SHOW CHANNEL REGISTRATION
+    document.addEventListener("DOMContentLoaded", function(){
+        window.createStatusSocket(0) 
+        window.createBlockSocket() 
+    });
+
+    var difficulty = [];
+    var utxo = [];
+	var ttm = [];
+    var pt = [];
+    var labels = [];
+	for (i = 1; i < 31; i++) { 
+	  labels.push("");
+      difficulty.push(0);
+      utxo.push(0);
+      ttm.push(0);
+      pt.push(0);
+	}
+	var ctxDifficulty = document.getElementById("difficultyChart").getContext('2d');
+	var difficultyChart = new Chart(ctxDifficulty, {
+	    type: 'line',
+	    data: {
+	    	labels: labels,
+	        datasets: [{
+	            label: 'Difficulty',
+	            data: difficulty,
+	            backgroundColor: [
+	            	'#ee880022',
+	            ],
+	            borderColor: [
+	                '#ee8800FF',
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+                xAxes:[{
+                    display: true
+                }],
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        },
+	        responsive:false
+	    }
+	});
+
+    var ctxTransactionPool = document.getElementById("pTChart").getContext('2d');
+	var pTChart = new Chart(ctxTransactionPool, {
+	    type: 'line',
+	    data: {
+	    	labels: labels,
+	        datasets: [{
+	            label: 'Number of pending transactions',
+	            data: pt,
+	            backgroundColor: [
+	            	'#ee880022',
+	            ],
+	            borderColor: [
+	                '#ee8800FF',
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+                xAxes:[{
+                    display: true
+                }],
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        },
+	        responsive:false
+	    }
+	});
+
+    var ctxUtxo = document.getElementById("utxoChart").getContext('2d');
+	var utxoChart = new Chart(ctxUtxo, {
+	    type: 'line',
+	    data: {
+	    	labels: labels,
+	        datasets: [{
+	            label: 'No. of unspent transactions',
+	            data: utxo,
+	            backgroundColor: [
+	            	'#ee880022',
+	            ],
+	            borderColor: [
+	                '#ee8800FF',
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        },
+	        responsive:false
+	    }
+	});
+
+    var ctxTTM = document.getElementById("ttmChart").getContext('2d');
+	var ttmChart = new Chart(ctxTTM, {
+	    type: 'line',
+	    data: {
+	    	labels: labels,
+	        datasets: [{
+	            label: 'Time to mine a block',
+	            data: ttm,
+	            backgroundColor: [
+	            	'#ee880022',
+	            ],
+	            borderColor: [
+	                '#ee8800FF',
+	            ],
+	            borderWidth: 1
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero:true
+	                }
+	            }]
+	        },
+	        responsive:false
+	    }
+	});
+
+	function addData(chart, data) {
+	    chart.data.datasets.forEach((dataset) => {
+	        dataset.data = data;
+	    });
+	    chart.update();
+	}
+
+	function update_difficulty(new_val){
+		data = difficulty;
+		data.splice(0,1);
+		data.push(new_val);
+		addData(difficultyChart, data);
+		difficulty = data;		
+	}
+
+    function update_utxo(new_val){
+		data = utxo;
+		data.splice(0,1);
+		data.push(new_val);
+		addData(utxoChart, data);
+		utxo = data;		
+	}
+
+    function update_ttm(new_val){
+		data = ttm;
+		data.splice(0,1);
+		data.push(new_val);
+		addData(ttmChart, data);
+		ttm = data;		
+	}
+
+    function update_pt(new_val){
+		data = pt;
+		data.splice(0,1);
+		data.push(new_val);
+		addData(pTChart, data);
+		pt = data;		
+	}
+ </script>

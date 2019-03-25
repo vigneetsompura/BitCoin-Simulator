@@ -1,0 +1,223 @@
+/* This file is for your main application css. */
+
+@import "./phoenix.css";
+
+.phx-logo{
+    font-family: Arial, Helvetica, sans-serif;
+    color: #555;
+}
+
+#logo-prefix{
+    font-size: 54px;
+    font-weight: bold;
+    color: #ee8800;
+}
+#logo-suffix{
+    font-size: 35px;;
+}
+
+.inputbox{
+    display: inline-block !important;
+    width: 200px;
+}
+
+.inputboxs{
+    display: inline-block !important;
+    width: 100px;
+}
+
+.chart-container{
+    text-align: left;
+    background: #ffffff;
+    padding: 0px;
+    margin-bottom: 0.5rem;
+    font-weight: 200;
+    font-size: 120%;
+}
+
+.blocks-container{
+    text-align: left;
+    background: #ffffff;
+    padding: 0px;
+    margin-top: 75px;
+    margin-bottom: 3rem;
+    font-weight: 200;
+    font-size: 100%;
+}
+
+.transaction-container{
+    text-align: left;
+    background: #ffffff;
+    padding: 0px;
+    margin-top: 75px;
+    margin-bottom: 3rem;
+    font-weight: 200;
+    font-size: 100%;
+}
+
+.block0 {
+    width: 100%;
+    height: 45px;
+    padding: 0;
+    margin:0px;
+    background: #f9f9f9;
+}
+
+.block1 {
+    width: 100%;
+    height: 45px;
+    padding: 0;
+    margin: 0px;
+    background: #eee;
+}
+
+.block-header {
+    width: 100%;
+    height: 60px;
+    padding: 0;
+    padding-left: 40px;
+    line-height: 60px;
+    vertical-align: middle;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 25px; 
+    margin:0px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: #c6c6c6;
+}
+
+.transaction-header {
+    width: 100%;
+    height: 60px;
+    padding: 0;
+    padding-left: 40px;
+    line-height: 60px;
+    vertical-align: middle;
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 25px; 
+    margin:0px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    background: #c6c6c6;
+}
+
+.id-container {
+    background: #eee;
+    padding: 3x;
+    padding-left: 10px;
+    width: 100%;
+    color: #ee8800;
+    font-weight: 600;
+    font-size: 85%;
+    height: 36px;
+    line-height: 30px;
+    vertical-align: middle;
+}
+
+.contents {
+    background: #f9f9f9;
+    padding: 3x;
+    padding-left: 25px;
+    width: 100%;
+}
+
+.input-contents{
+    padding: 5px;
+    display: inline-block;
+    width: 47%;
+}
+
+.input-contents p {
+    font-size: 10px;
+    margin: 0px;
+    padding: 0px;
+    line-height: 14px;
+    vertical-align: middle;
+
+}
+
+.output-contents{
+    padding: 5px;
+    display: inline-block;
+    width: 47%;
+}
+
+.output-contents p {
+    font-size: 10px;
+    margin: 0px;
+    padding: 0px;
+    line-height: 14px;
+    vertical-align: middle;
+
+}
+
+.block-tail {
+    width: 100%;
+    height: 45px;
+    padding: 0;
+    margin: 0px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: #c6c6c6;
+}
+
+.block-id {
+    width:10%;
+    padding: 3px;
+    color: #555;
+    line-height: 39px;
+    text-align: right;
+    margin-right: 10px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.block-hash {
+    padding: 3px;
+    color: #ee8800;
+    line-height: 39px;
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.status-container {
+    text-align: left;
+    border-bottom: 1px solid #e3e3e3;
+    background: #f9f9f9;
+    border-radius: 6px;
+    padding: 3em;
+    margin-bottom: 3rem;
+    font-size: 100%;
+}
+
+.status-container table tr td{
+    height: 25px;
+    margin: 0px;
+    padding: 0px 10px;
+    border: 0px;
+}
+
+
+
+.statustype {
+    margin: 0px;
+    font-weight: 500;
+    text-align: right;
+    width: 275px;
+}
+
+.statustype p {
+    margin: 0px;
+}
+
+.statusmsg span{
+    font-weight: 100;
+    color: #ee8800;
+}
+
+.statusmsg {
+    font-weight: 100;
+    color: #ee8800;
+}

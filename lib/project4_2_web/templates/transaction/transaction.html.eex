@@ -1,0 +1,21 @@
+<section class="status-container">
+    <div class="form-group">    
+        Sender &nbsp : <div class="inputbox"><input type="number" class="form-control" id="sender"></div> <br>
+        Receiver : <div class="inputbox"><input type="number" class="form-control" id="receiver"></div> <br>
+        Amount &nbsp : <div class="inputbox"><input type="number" class="form-control" id="amount"></div> <br><br>
+        
+        <center><input id="confirm" class="btn btn-primary" type="button" value="Confirm"></center>
+    </div>
+
+</section>
+
+<script>
+    $("#confirm").click(function(){
+        if($("#amount").val().includes(".")) {
+            window.location.href = "/transaction/"+ $("#sender").val()+"/"+$("#receiver").val()+"/"+$("#amount").val();
+        }else{
+            window.location.href = "/transaction/"+ $("#sender").val()+"/"+$("#receiver").val()+"/"+$("#amount").val()+".0";
+        }
+        
+    });
+</script>

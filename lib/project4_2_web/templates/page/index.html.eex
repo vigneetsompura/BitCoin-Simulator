@@ -1,0 +1,34 @@
+<section class="phx-hero">
+  <div class="form-group">
+     
+     Number of Miners &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: <div class="inputbox"><input type="number" class="form-control" id="miners"></div> <br>
+     Number of Wallets &nbsp&nbsp&nbsp&nbsp&nbsp: <div class="inputbox"><input type="number" class="form-control" id="wallets"></div> <br>
+     Initial Mining Reward &nbsp: <div class="inputbox"><input type="number" class="form-control" id="rewards"></div> <br><br>
+    
+     Maximum Miners &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp: <div class="inputbox"><input type="number" class="form-control" id="max_miners"></div> <br>
+     
+     Add <div class="inputboxs"><input type="number" class="form-control" 
+      id="add_min_miners"></div> to <div class="inputboxs"><input type="number" class="form-control"
+       id="add_max_miners"></div> miners every <div class="inputboxs"><input type="number" class="form-control"
+        id="add_miner_delay" ></div> ms. <br>
+     Make <div class="inputboxs"><input type="number" class="form-control" 
+      id="add_min_transactions"></div> to <div class="inputboxs"><input type="number" class="form-control"
+       id="add_max_transactions"></div> random transactions every <div class="inputboxs"><input type="number" class="form-control"
+        id="add_transaction_delay" ></div> ms. <br>
+     Halve rewards after every <div class="inputboxs"><input type="number" class="form-control" id="reward_change_rate"></div> blocks</br></br></br>
+     <center><input id="confirm" class="btn btn-primary" type="button" value="Confirm"></center>
+
+  </div>
+</section>
+
+
+<script>
+  $("#confirm").click(function(){
+    
+    window.location.href = "dashboard/"+$("#miners").val()+"/"+$("#wallets").val()+"/"+$("#rewards").val()+"/"+$("#max_miners").val()
+    +"/"+$("#add_min_miners").val()+"/"+$("#add_max_miners").val()+"/"+$("#add_miner_delay").val()
+    +"/"+$("#add_min_transactions").val()+"/"+$("#add_max_transactions").val()+"/"+$("#add_transaction_delay").val()
+    +"/"+$("#reward_change_rate").val();
+  });
+
+</script>
